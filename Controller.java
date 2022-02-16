@@ -25,8 +25,7 @@ public class Controller{
 
         try{
             view.welcome();
-            String operations = casio.doOperation();
-            view.output(operations);
+            casio.doOperation();
             view.despedida();
         } catch (Exception e){
             String s = "ERROR: " + e.getMessage();

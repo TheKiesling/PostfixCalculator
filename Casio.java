@@ -56,15 +56,14 @@ public class Casio {
      * @return String
      * @throws FileNotFoundException
      */
-    public String doOperation() throws FileNotFoundException{
-        String operations = "";
+    public void doOperation() throws FileNotFoundException{
+        
         if(read())
             while(!this.operations.isEmpty()){
                 String operation = this.operations.pull();
                 int result = calculator.Evaluate(operation);
-                operations += operation + "\n" + result + "\n"+ "\n";
+                System.out.println(operation + "\n" + result + "\n"+ "\n");
             }
-        return operations;
     }
     //****************************************************************
 }
