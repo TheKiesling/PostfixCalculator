@@ -19,7 +19,7 @@ public class Calculator implements IPosfixCalc{
         - Última modificación: 15/02/2022
 
     Clase que implementa la interfaz de IPosfixCalc, y sirve como ADT
-    */ 
+    */
 
     //---------------------------PROPIEDADES--------------------------
     private Stack<Integer> stack;
@@ -38,15 +38,17 @@ public class Calculator implements IPosfixCalc{
         stack = new Stack<Integer>();
         boolean flag = true;
         int num1, num2, result = 0;
-        String[] values = expresion.split(" ");
+        String[] values = expresion.split(" "); //Separar los valores en la expresión
         
-        for(int i = 0; i < values.length && flag; i++){
+        for(int i = 0; i < values.length && flag; i++){ //Recorrer toda la expresión
                 
-            if(Arrays.asList(operands).contains(values[i])) //Número
+            if(Arrays.asList(operands).contains(values[i])) //Si es Número
                 stack.push(Integer.parseInt(values[i]));
 
-            else if(Arrays.asList(operators).contains(values[i])){ //Operador
-                if (stack.count() >= 2){
+            else if(Arrays.asList(operators).contains(values[i])){ //Si es Operador
+                if (stack.count() >= 2){ //Si hay dos o más en la pila es porque se pueden hacer operaciones
+
+                    //Sacar los dos últimos números ingresados
                     num2 = stack.pull();
                     num1 = stack.pull();
                     switch(values[i]){
@@ -63,9 +65,9 @@ public class Calculator implements IPosfixCalc{
                         break;
 
                         case "/": //División
-                            if (num2 != 0)
+                            if (num2 != 0) //Si el segundo número es distinto de cero se puede hacer la división
                                 stack.push(num1 / num2);
-                            else{
+                            else{ //División indefinida
                                 stack.push(9999);
                                 System.out.println("¡ERROR! División entre cero!");
                                 flag = false;
@@ -74,12 +76,12 @@ public class Calculator implements IPosfixCalc{
 
                     }
                 }
-                else{
+                else{ //Faltan números
                     System.out.println("¡ERROR! Le han faltado operandos!");
                     flag = false;
                 }
             }
-            else{
+            else{ //No ingresó números ni operadores
                 stack.push(9999);
                 System.out.println("¡ERROR! Ha ingresado un carácter inválido!");
                 flag = false;
@@ -87,15 +89,15 @@ public class Calculator implements IPosfixCalc{
         }
         if (stack.count() == 1 && flag) //Si ya solo queda un elemento en la pila
             result = stack.pull();
-        else if (!flag)
+        else if (!flag) //Si queda más de un elemento es porque faltaron operadores
             stack.push(9999);
         else {
             System.out.println("¡ERROR! Le han faltado operadores!");
             flag = false;
         }
-        if (flag)
+        if (flag) //Si la operación es válida
             return result;
-        else
+        else //Existió algún error respecto a la operación (sintáxis o lógica)
             return 9999;
     }
     //****************************************************************

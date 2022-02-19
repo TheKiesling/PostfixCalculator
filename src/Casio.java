@@ -24,6 +24,7 @@ public class Casio {
     */ 
 
     //---------------------------PROPIEDADES--------------------------
+    //IMPORTANTE: Cambiar el tipo de dato para probar las clases de otros compañeros
     private Calculator calculator = new Calculator();
     private Stack<String> operations = new Stack<String>();
 
